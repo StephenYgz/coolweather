@@ -13,235 +13,267 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <ScrollView
-        android:id="@+id/weather_layout"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <!-- content -->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!-- 头布局 -->
-            <RelativeLayout
+            <ScrollView
+                android:id="@+id/weather_layout"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none">
 
-                <TextView
-                    android:id="@+id/title_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    tools:text="上海" />
-
-                <TextView
-                    android:id="@+id/title_update_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:textColor="#fff"
-                    android:textSize="16sp"
-                    tools:text="201802011525" />
-
-            </RelativeLayout>
-
-            <!-- 当前天气信息 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/degree_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:textColor="#fff"
-                    android:textSize="60sp"
-                    tools:text="0" />
-
-                <TextView
-                    android:id="@+id/weather_info_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    tools:text="0" />
-
-            </LinearLayout>
-
-            <!-- 未来几天天气信息 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="#8000"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:text="预报"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <!-- 代码动态添加未来几天天气信息 -->
                 <LinearLayout
-                    android:id="@+id/forecast_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
                     android:orientation="vertical">
 
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- 空气质量信息 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="#8000"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:text="空气质量"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:orientation="horizontal">
-
+                    <!-- 头布局 -->
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize">
+
+                        <Button
+                            android:id="@+id/nav_button"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/ic_home" />
+
+                        <TextView
+                            android:id="@+id/title_city"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textColor="#fff"
+                            android:textSize="20sp"
+                            tools:text="上海" />
+
+                        <TextView
+                            android:id="@+id/title_update_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:textColor="#fff"
+                            android:textSize="16sp"
+                            tools:text="201802011525" />
+
+                    </RelativeLayout>
+
+                    <!-- 当前天气信息 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/degree_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:textColor="#fff"
+                            android:textSize="60sp"
+                            tools:text="0" />
+
+                        <TextView
+                            android:id="@+id/weather_info_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:textColor="#fff"
+                            android:textSize="20sp"
+                            tools:text="0" />
+
+                    </LinearLayout>
+
+                    <!-- 未来几天天气信息 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="#8000"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:text="预报"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
+
+                        <!-- 代码动态添加未来几天天气信息 -->
+                        <LinearLayout
+                            android:id="@+id/forecast_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- 空气质量信息 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="#8000"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:text="空气质量"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:orientation="vertical">
+                            android:layout_margin="15dp"
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/aqi_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:textColor="#fff"
-                                android:textSize="40sp"
-                                tools:text="60" />
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="AQI指数"
-                                android:textColor="#fff" />
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/aqi_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:textColor="#fff"
+                                        android:textSize="40sp"
+                                        tools:text="60" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="AQI指数"
+                                        android:textColor="#fff" />
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/pm25_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:textColor="#fff"
+                                        android:textSize="40sp"
+                                        tools:text="80" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:text="PM2.5指数"
+                                        android:textColor="#fff" />
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
 
                         </LinearLayout>
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                    <!-- 生活建议信息 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:background="#8000"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:orientation="vertical">
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="15dp"
+                            android:text="生活建议"
+                            android:textColor="#fff"
+                            android:textSize="20sp" />
 
-                            <TextView
-                                android:id="@+id/pm25_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:textColor="#fff"
-                                android:textSize="40sp"
-                                tools:text="80" />
+                        <TextView
+                            android:id="@+id/comfort_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:textColor="#fff"
+                            tools:text="舒适度建议" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:text="PM2.5指数"
-                                android:textColor="#fff" />
+                        <TextView
+                            android:id="@+id/car_wash_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:textColor="#fff"
+                            tools:text="洗车建议" />
 
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/sport_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:textColor="#fff"
+                            tools:text="运动建议" />
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </ScrollView>
 
-            <!-- 生活建议信息 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="#8000"
-                android:orientation="vertical">
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:text="生活建议"
-                    android:textColor="#fff"
-                    android:textSize="20sp" />
+        <!-- drawer -->
+        <fragment
+            android:id="@+id/choose_area_fragment"
+            android:name="com.demo.coolweather.ChooseAreaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
 
-                <TextView
-                    android:id="@+id/comfort_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:textColor="#fff"
-                    tools:text="舒适度建议" />
-
-                <TextView
-                    android:id="@+id/car_wash_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:textColor="#fff"
-                    tools:text="洗车建议" />
-
-                <TextView
-                    android:id="@+id/sport_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:textColor="#fff"
-                    tools:text="运动建议" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </android.support.v4.widget.DrawerLayout>
 
 </FrameLayout>

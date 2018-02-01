@@ -39,6 +39,18 @@ public class WeatherActivity extends AppCompatActivity {
      */
     private ImageView bingPicImg;
     /**
+     * 滑动菜单
+     */
+    private DrawerLayout drawerLayout;
+    /**
+     * 打开滑动菜单的按钮
+     */
+    private Button navButton;
+    /**
+     * 下拉刷新
+     */
+    private SwipeRefreshLayout swipeRefresh;
+    /**
      * 天气信息最外层布局
      */
     private ScrollView weatherLayout;
@@ -97,6 +109,24 @@ public class WeatherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_weather);
         // 初始化各控件
         bingPicImg = ((ImageView) findViewById(R.id.bing_pic_img));
+        swipeRefresh = ((SwipeRefreshLayout) findViewById(R.id.swipe_refresh));
+        drawerLayout = ((DrawerLayout) findViewById(R.id.drawer_layout));
+        navButton = ((Button) findViewById(R.id.nav_button));
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 打开滑动菜单
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 下拉刷新时重新去服务器查询数据
+                requestWeather(mWeatherId);
+            }
+        });
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
         titleCity = (TextView) findViewById(R.id.title_city);
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
@@ -157,6 +187,7 @@ public class WeatherActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                         }
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }
@@ -168,11 +199,13 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }
         });
 
+        // 请求天气信息后重新获取最新必应美图
         loadBingPic();
     }
 
@@ -252,5 +285,13 @@ public class WeatherActivity extends AppCompatActivity {
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(bingPicImg);
+    }
+
+    public DrawerLayout getDrawerLayourt() {
+        return drawerLayout;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefresh;
     }
 }

@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.demo.coolweather.db.City;
 import com.demo.coolweather.db.County;
 import com.demo.coolweather.db.Province;
+import com.demo.coolweather.gson.Weather;
 import com.demo.coolweather.util.HttpUtil;
 import com.demo.coolweather.util.Utility;
 
@@ -100,10 +101,18 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY) {
                     String weatherId = countyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id", weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    // 根据当前所在activity处理不同的逻辑
+                    if (getActivity() instanceof MainActivity) {
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if (getActivity() instanceof WeatherActivity) {
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.getDrawerLayourt().closeDrawers();
+                        activity.getSwipeRefreshLayout().setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
